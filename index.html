@@ -6,6 +6,7 @@
   <script type="text/javascript" src="jquery.tubular.1.0.js"></script>
   </head>
   <body style="overflow:hidden;background-color: black;">
+  <div id="player"></div>
     <script>
     function isMobile(){
         if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
@@ -13,7 +14,6 @@
         }
     }
     if (isMobile()) {
-      document.createElement("player");
       // 2. This code loads the IFrame Player API code asynchronously.
       var tag = document.createElement('script');
 
@@ -23,11 +23,11 @@
 
       // 3. This function creates an <iframe> (and YouTube player)
       //    after the API code downloads.
-      var player;
+      var player, flip = true;
       function onYouTubeIframeAPIReady() {
         player = new YT.Player('player', {
-          height: '390',
-          width: '640',
+          height: window.innerHeight,
+          width: window.innerWidth,
           videoId: 'y_PZPpWTRTU',
           playerVars: {
             autoplay: 1,
@@ -35,14 +35,18 @@
             playlist:'y_PZPpWTRTU'
           },
           events: {
-            'onStateChange': function() {
-              if (ga && state.data === 0) {
+            'onStateChange': function(state) {
+              if (ga && state.data === 0 && !flip) {
                 ga('set', 'metric1', 1);
                 ga('send', 'event', 'videoLooped', "y_PZPpWTRTU", 1);
                 console.log("sent ga data");
               }
+              flip = !flip;
             }
           }
+        });
+        $(window).on("orientationchange", function(){
+          player.setSize(window.innerWidth, window.innerHeight);
         });
       }
     } else {
