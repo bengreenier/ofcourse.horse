@@ -19,12 +19,21 @@
         player = new YT.Player('ytplayer', {
           height: window.screen.height,
           width: window.screen.width,
-          fs: 1,
-          autoplay: 1,
-          loop: 1,
+          playerVars: {
+            fs: 1,
+            autoplay: 1,
+            loop: 1
+          }
           videoId: 'y_PZPpWTRTU',
-          playlist: 'y_PZPpWTRTU'
+          playlist: 'y_PZPpWTRTU',
+          events: {
+            'onReady': onPlayerReady
+          }
         });
+      }
+
+      function onPlayerReady(event) {
+        event.target.playVideo();
       }
     </script>
     <script>
