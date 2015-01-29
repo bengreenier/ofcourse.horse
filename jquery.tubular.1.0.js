@@ -79,6 +79,9 @@
                 if (ga) {
                     ga('send', 'event', 'videoLooped', options.videoId, 1);
                 }
+                if (typeof(options.fireOnLoop) === "function") {
+                    options.fireOnLoop({state: state, options:options, player:player});
+                }
             }
         }
 
