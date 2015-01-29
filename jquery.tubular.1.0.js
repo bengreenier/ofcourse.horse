@@ -76,6 +76,9 @@
         window.onPlayerStateChange = function(state) {
             if (state.data === 0 && options.repeat) { // video ended and repeat option is set true
                 player.seekTo(options.start); // restart
+                if (ga) {
+                    ga('send', 'event', 'videoLooped', options.videoId, 1);
+                }
             }
         }
 
