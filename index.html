@@ -2,39 +2,13 @@
 <html lang="en">
   <head>
   <title>ofcourse.horse</title>
+  <script type="text/javascript" src="jquery-1.11.2.min.js"></script>
+  <script type="text/javascript" src="jquery.tubular.1.0.js"></script>
   </head>
-  <body>
+  <body style="overflow:hidden;background-color: black;">
     <div id="ytplayer"></div>
     <script>
-      // Load the IFrame Player API code asynchronously.
-      var tag = document.createElement('script');
-      tag.src = "https://www.youtube.com/player_api";
-      var firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-      // Replace the 'ytplayer' element with an <iframe> and
-      // YouTube player after the API code downloads.
-      var player;
-      function onYouTubePlayerAPIReady() {
-        player = new YT.Player('ytplayer', {
-          height: window.screen.height,
-          width: window.screen.width,
-          playerVars: {
-            fs: 1,
-            autoplay: 1,
-            loop: 1
-          }
-          videoId: 'y_PZPpWTRTU',
-          playlist: 'y_PZPpWTRTU',
-          events: {
-            'onReady': onPlayerReady
-          }
-        });
-      }
-
-      function onPlayerReady(event) {
-        event.target.playVideo();
-      }
+    $("body").tubular({videoId:"y_PZPpWTRTU",repeat:true, mute:false});
     </script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
