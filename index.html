@@ -7,13 +7,52 @@
   </head>
   <body style="overflow:hidden;background-color: black;">
     <script>
-    $("body").tubular({videoId:"y_PZPpWTRTU",repeat:true, mute:false, fireOnLoop: function(o) {
-      if (ga) {
-        ga('set', 'metric1', 1);
-        ga('send', 'event', 'videoLooped', o.options.videoId, 1);
-        console.log("sent ga data");
+    function isMobile(){
+        if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+          return true;
+        }
+    }
+    if (isMobile()) {
+      // 2. This code loads the IFrame Player API code asynchronously.
+      var tag = document.createElement('script');
+
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      // 3. This function creates an <iframe> (and YouTube player)
+      //    after the API code downloads.
+      var player;
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          height: '390',
+          width: '640',
+          videoId: 'y_PZPpWTRTU',
+          playerVars: {
+            autoplay: 1,
+            loop: 1,
+            playlist:'y_PZPpWTRTU'
+          },
+          events: {
+            'onStateChange': function() {
+              if (ga && state.data === 0) {
+                ga('set', 'metric1', 1);
+                ga('send', 'event', 'videoLooped', "y_PZPpWTRTU", 1);
+                console.log("sent ga data");
+              }
+            }
+          }
+        });
       }
-    }});
+    } else {
+      $("body").tubular({videoId:"y_PZPpWTRTU",repeat:true, mute:false, playButtonClass:"", fireOnLoop: function(o) {
+        if (ga) {
+          ga('set', 'metric1', 1);
+          ga('send', 'event', 'videoLooped', o.options.videoId, 1);
+          console.log("sent ga data");
+        }
+      }});
+    }
     </script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
