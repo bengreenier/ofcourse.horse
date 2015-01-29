@@ -8,8 +8,11 @@
   <body style="overflow:hidden;background-color: black;">
     <script>
     $("body").tubular({videoId:"y_PZPpWTRTU",repeat:true, mute:false, fireOnLoop: function(o) {
-      if (ga)
+      if (ga) {
         ga('set', 'metric1', 1);
+        ga('send', 'event', 'videoLooped', o.options.videoId, 1);
+        console.log("sent ga data");
+      }
     }});
     </script>
     <script>

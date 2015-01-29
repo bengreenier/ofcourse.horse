@@ -76,9 +76,6 @@
         window.onPlayerStateChange = function(state) {
             if (state.data === 0 && options.repeat) { // video ended and repeat option is set true
                 player.seekTo(options.start); // restart
-                if (ga) {
-                    ga('send', 'event', 'videoLooped', options.videoId, 1);
-                }
                 if (typeof(options.fireOnLoop) === "function") {
                     options.fireOnLoop({state: state, options:options, player:player});
                 }
