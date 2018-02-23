@@ -38,7 +38,7 @@
             'onStateChange': function(state) {
               if (ga && state.data === 0 && !flip) {
                 ga('set', 'metric1', 1);
-                ga('send', 'event', 'videoLooped', "y_PZPpWTRTU", 1);
+                ga('send', 'event', 'videoLooped', "91LRPk8x14s", 1);
                 console.log("sent ga data");
               }
               flip = !flip;
@@ -50,7 +50,7 @@
         });
       }
     } else {
-      $("body").tubular({videoId:"y_PZPpWTRTU",repeat:true, mute:false, playButtonClass:"", fireOnLoop: function(o) {
+      $("body").tubular({videoId:"91LRPk8x14s",repeat:true, mute:false, playButtonClass:"", fireOnLoop: function(o) {
         if (ga) {
           ga('set', 'metric1', 1);
           ga('send', 'event', 'videoLooped', o.options.videoId, 1);
